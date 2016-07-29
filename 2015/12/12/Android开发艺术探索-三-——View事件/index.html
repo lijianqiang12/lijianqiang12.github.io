@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android开发艺术探索(三)——View事件 | Leo&#39;s Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="&amp;emsp;&amp;emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发艺术探索(三)——View事件">
+<meta property="og:url" content="http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/index.html">
+<meta property="og:site_name" content="Leo's Home">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。">
+<meta property="og:image" content="http://lijianqiang12.com/images/View的位置坐标和父容器的关系.png">
+<meta property="og:updated_time" content="2016-01-02T04:40:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发艺术探索(三)——View事件">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。">
+<meta name="twitter:image" content="http://lijianqiang12.com/images/View的位置坐标和父容器的关系.png">
+    
+
+    
+        <link rel="alternate" href="atom.xml" title="Leo&#39;s Home" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/cat.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-81270501-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+    
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Leo&#39;s Home</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">时间轴</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/cat.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">时间轴</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/cat.png" />
+            <h2 id="name">Leo</h2>
+            <h3 id="title">Android Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Tianjin, China</span>
+            <a id="follow" target="_blank" href="https://github.com/lijianqiang12/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                4
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                5
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/lijianqiang12" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Android开发艺术探索-三-——View事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android开发艺术探索(三)——View事件
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/12/12/Android开发艺术探索-三-——View事件/">
+            <time datetime="2015-12-12T15:38:04.000Z" itemprop="datePublished">2015-12-12</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/android/">android</a>, <a class="tag-link" href="/tags/读书笔记/">读书笔记</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>&emsp;&emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。</p>
+<a id="more"></a>
+<h2 id="View基础"><a href="#View基础" class="headerlink" title="View基础"></a>View基础</h2><h3 id="View与ViewGroup"><a href="#View与ViewGroup" class="headerlink" title="View与ViewGroup"></a>View与ViewGroup</h3><p>&emsp;&emsp;ViewGroup继承自View，因此View本身可以是单个控件也可以是一组控件，而ViewGroup内部又可以包含View或ViewGroup。</p>
+<h3 id="View的位置参数"><a href="#View的位置参数" class="headerlink" title="View的位置参数"></a>View的位置参数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">left = getLeft();</div><div class="line">right = getRight();</div><div class="line">top = getTop();</div><div class="line">buttom = getButtom();</div></pre></td></tr></table></figure>
+<center><img src="/images/View的位置坐标和父容器的关系.png" width="45%" height="45%">View的位置坐标和父容器的关系</center>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = left + translationX;</div><div class="line">y = top + translationY;</div></pre></td></tr></table></figure>
+<ul>
+<li>x,y : View左上角的坐标</li>
+<li>translationX,translationY : View左上角相对于父容器的偏移量</li>
+</ul>
+<h3 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h3><p>在手指接触屏幕所产生的一系列事件中，典型事件如下：</p>
+<ul>
+<li>ACTION_DOWN——手指刚接触屏幕</li>
+<li>ACTION_MOVE——手指滑动</li>
+<li>ACTION_UP——手指离开屏幕</li>
+</ul>
+<h3 id="TouchSlop"><a href="#TouchSlop" class="headerlink" title="TouchSlop"></a>TouchSlop</h3><p>系统所能识别出的最小滑动距离，获取方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ViewConfiguration.get(getContext()).getScaledTouchSlop();</div></pre></td></tr></table></figure>
+<p>源码中为8dp</p>
+<h3 id="速度追踪VelocityTracker"><a href="#速度追踪VelocityTracker" class="headerlink" title="速度追踪VelocityTracker"></a>速度追踪VelocityTracker</h3><p>用于追踪手指的滑动速度，使用方法如下：</p>
+<p>&emsp;1. 在View的onTouchEvent中追踪当前单击事件的速度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">VelocityTracker velocityTracker = VelocityTracker.obtain();</div><div class="line">velocityTracker.addMovement(event);</div></pre></td></tr></table></figure>
+<p>&emsp;2. 当我们想知道当前的滑动速度时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">velocityTracker.copmuteCurrentVelocity(<span class="number">1000</span>);                <span class="comment">//计算一秒之内的变化情况</span></div><div class="line"><span class="keyword">int</span> xVelocity = (<span class="keyword">int</span>) velocityTracker.getXVelocity();        <span class="comment">//一秒之内X坐标的变化情况，从左向右为正</span></div><div class="line"><span class="keyword">int</span> yVelocity = (<span class="keyword">int</span>) velocityTracker.getYVelocity();        <span class="comment">//一秒之内Y坐标的变化情况，从上向下为正</span></div></pre></td></tr></table></figure>
+<p>&emsp;3. 不用时重置并回收内存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">velocityTracker.clear();</div><div class="line">velocityTracker.recycler();</div></pre></td></tr></table></figure>
+<h3 id="手势GestureDetector"><a href="#手势GestureDetector" class="headerlink" title="手势GestureDetector"></a>手势GestureDetector</h3><p>检测手势，用于辅助检测用户的单击、滑动、长按、双击等行为，使用方式如下：</p>
+<p>&emsp;1. 创建GestureDetector对象并实现OnGestureListener和OnDoubleTapListener接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GestureDetector mGestureDetector = <span class="keyword">new</span> GestureDetector(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+<p>&emsp;2. 接管目标View的onTouchEvent方法，在View的onTouchEvent中添加：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> consume = mGestureDetector.onTouchEvent(event);</div><div class="line"><span class="keyword">return</span> consume;</div></pre></td></tr></table></figure>
+<p>方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">所属接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">onDown</td>
+<td style="text-align:center">手指轻触屏幕的瞬间，由一个ACTION_DOWN触发</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onShowPress</td>
+<td style="text-align:center">手指轻触屏幕，尚未拖动，强调没有松开或拖动的状态（个人理解在onDown之后）</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onSingleTapUp</td>
+<td style="text-align:center">单击，有可能是双击中的一次</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onScroll</td>
+<td style="text-align:center">手指按下并拖动</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onLongPress</td>
+<td style="text-align:center">长按</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onFling</td>
+<td style="text-align:center">按下屏幕快速滑动后松开</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onDoubleTap</td>
+<td style="text-align:center">双击，由两次单击组成，不能与onSingleTapConfirmed共存</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onSingleTapConfirmed</td>
+<td style="text-align:center">严格的单击行为，不可能是双击中的一次</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onDoubleTapEvent</td>
+<td style="text-align:center">双击，在双击期间，ACTION_UP、ACTION_MOVE、ACTION_DOWN都会触发此回调</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+</tbody>
+</table>
+<h3 id="弹性滑动Scroller"><a href="#弹性滑动Scroller" class="headerlink" title="弹性滑动Scroller"></a>弹性滑动Scroller</h3><p>scrollTo和scrollBy过程是瞬间完成的，某些情况下用户体验并不好，而利用Scroller可以实现弹性滑动，使用方法如下：</p>
+<ul>
+<li>在继承View的类中：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Scroller mScroller = <span class="keyword">new</span> Scroller(mContext);</div><div class="line"></div><div class="line"><span class="comment">//缓慢滑动到指定位置</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> destX, <span class="keyword">int</span> destY)</span> </span>&#123;</div><div class="line">true<span class="keyword">int</span> scrollX = getScrollX();</div><div class="line">true<span class="keyword">int</span> delta = destX - scrollX;</div><div class="line">truemScroller.startScroll(scrollX, <span class="number">0</span>, delta, <span class="number">0</span>, <span class="number">1000</span>);  <span class="comment">//1s内缓慢滑动到destX</span></div><div class="line">trueinvalidate();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span></span>&#123;</div><div class="line">true<span class="keyword">if</span> (mScroller.computeScrollOffset()) &#123;</div><div class="line">truetruescrollTo(mScroller.getCurrX(), mScroller.getCurrY());</div><div class="line">truetruepostInvalidate();</div><div class="line">true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/" data-id="cir8cpkfy0000xlknzfzquj65" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/12/14/小事/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    小事
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="uyan_frame"></div>
+
+    
+    </section>
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 Leo<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2108373"></script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

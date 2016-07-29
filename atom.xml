@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Leo&#39;s Home</title>
+  <subtitle>Android Developer</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://lijianqiang12.com/"/>
+  <updated>2016-07-28T11:51:23.000Z</updated>
+  <id>http://lijianqiang12.com/</id>
+  
+  <author>
+    <name>Leo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RxJava</title>
+    <link href="http://lijianqiang12.com/2016/07/27/RxJava/"/>
+    <id>http://lijianqiang12.com/2016/07/27/RxJava/</id>
+    <published>2016-07-27T13:57:43.000Z</published>
+    <updated>2016-07-28T11:51:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="RxJava使用方法"><a href="#RxJava使用方法" class="headerlink" title="RxJava使用方法"></a>RxJava使用方法</h1><h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
+<li>导入jcenter<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'io.reactivex:rxjava:1.0.14'</span></div><div class="line">compile <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<a id="more"></a>
+<hr>
+<ol>
+<li><p>创建观察者Observer对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> Observer&lt;String&gt; observer = <span class="keyword">new</span> Observer&lt;String&gt;() &#123;</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(String s)</span></span>&#123;</div><div class="line">          Log.d(tag,<span class="string">"Item: "</span>+s);</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span></span>&#123;</div><div class="line">          Log.d(tag,<span class="string">"Completed!"</span>);</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwablee)</span></span>&#123;</div><div class="line">          Log.d(tag,<span class="string">"Error!"</span>);</div><div class="line">     &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>Subscriber是Observer的扩展，比Observer多onStart()法，会在subscribe刚开始而事件未发送时调用，但不适用于显示progressbar，因为它总在subscribe发生的线程被调用，不能指定线程，若想指定线程，需要用 doOnSubscribe()。</p>
+</li>
+<li><p>Subscription是实现了Subscriber的一个接口，其方法unsubscribe用于取消前订阅状态，调用后，Subsrciber不再接收事件，调用前最好用isUnsubscribed()断，因为在 subscribe() 之后， Observable 会持有 Subscriber 的引用，因此尽快在合适的地方（例如 onPause() onStop() 等方法中）调用unsubscribe释放，避免内存泄漏。</p>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>创建被观察者<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Observable observable = Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;String&gt;() &#123;</div><div class="line">     <span class="meta">@Override</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> String&gt; subscriber)</span> </span>&#123;</div><div class="line">          subscriber.onNext(<span class="string">"Hello"</span>);</div><div class="line">          subscriber.onNext(<span class="string">"Hi"</span>);</div><div class="line">          subscriber.onNext(<span class="string">"Aloha"</span>);</div><div class="line">          subscriber.onCompleted();</div><div class="line">     &#125;</div><div class="line">&#125;);</div><div class="line"><span class="comment">//与上面的写法等价</span></div><div class="line"><span class="comment">//或</span></div><div class="line">Observable observable = Observable.just(<span class="string">"Hello"</span>, <span class="string">"Hi"</span>, <span class="string">"Aloha"</span>);</div><div class="line"><span class="comment">//或</span></div><div class="line">String[] words = &#123;<span class="string">"Hello"</span>, <span class="string">"Hi"</span>, <span class="string">"Aloha"</span>&#125;;</div><div class="line">Observable observable = Observable.from(words);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<ol>
+<li><p>订阅</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">observable.subscribe(observer);</div><div class="line"><span class="comment">// 或者：</span></div><div class="line">observable.subscribe(subscriber);</div></pre></td></tr></table></figure>
+<ul>
+<li>除了 subscribe(Observer) 和 subscribe(Subscriber) ，subscribe() 还支持不完整定义的回调，RxJava 会自动根据定义创建出 Subscriber 。形式如下：</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"> Action1&lt;String&gt; onNextAction = <span class="keyword">new</span> Action1&lt;String&gt;() &#123;</div><div class="line">    <span class="comment">// onNext()</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        Log.d(tag, s);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">Action1&lt;Throwable&gt; onErrorAction = <span class="keyword">new</span> Action1&lt;Throwable&gt;() &#123;</div><div class="line">    <span class="comment">// onError()</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Throwable throwable)</span> </span>&#123;</div><div class="line">        <span class="comment">// Error handling</span></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">Action0 onCompletedAction = <span class="keyword">new</span> Action0() &#123;</div><div class="line">    <span class="comment">// onCompleted()</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">()</span> </span>&#123;</div><div class="line">        Log.d(tag, <span class="string">"completed"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 自动创建 Subscriber ，并使用 onNextAction 来定义 onNext()</span></div><div class="line">observable.subscribe(onNextAction);</div><div class="line"><span class="comment">// 自动创建 Subscriber ，并使用 onNextAction 和 onErrorAction 来定义 onNext() 和 onError()</span></div><div class="line">observable.subscribe(onNextAction, onErrorAction);</div><div class="line"><span class="comment">// 自动创建 Subscriber ，并使用 onNextAction、 onErrorAction 和 onCompletedAction 来定义 onNext()、 onError() 和 onCompleted()</span></div><div class="line">observable.subscribe(onNextAction, onErrorAction, onCompletedAction);</div></pre></td></tr></table></figure>
+<hr>
+<ol>
+<li>线程控制——Scheduler<ul>
+<li>Schedulers.immediate(): 直接在当前线程运行，相当于不指定线程。这是默认的 Scheduler。</li>
+<li>Schedulers.newThread(): 总是启用新线程，并在新线程执行操作。</li>
+<li>Schedulers.io(): I/O 操作（读写文件、读写数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程。</li>
+<li>Schedulers.computation(): 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU。</li>
+<li>另外， Android 还有一个专用的 AndroidSchedulers.mainThread()，它指定的操作将在 Android 主线程运行。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Observable.just(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</div><div class="line">    .subscribeOn(Schedulers.io()) <span class="comment">// 指定 subscribe() 发生在 IO 线程</span></div><div class="line">    .observeOn(AndroidSchedulers.mainThread()) <span class="comment">// 指定 Subscriber 的回调发生在主线程</span></div><div class="line">    .subscribe(<span class="keyword">new</span> Action1&lt;Integer&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Integer number)</span> </span>&#123;</div><div class="line">            Log.d(tag, <span class="string">"number:"</span> + number);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<p>加载图片示例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> drawableRes = ...;</div><div class="line">ImageView imageView = ...;</div><div class="line">Observable.create(<span class="keyword">new</span> OnSubscribe&lt;Drawable&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> Drawable&gt; subscriber)</span> </span>&#123;</div><div class="line">        Drawable drawable = getTheme().getDrawable(drawableRes));</div><div class="line">        subscriber.onNext(drawable);</div><div class="line">        subscriber.onCompleted();</div><div class="line">    &#125;</div><div class="line">&#125;)</div><div class="line">.subscribeOn(Schedulers.io()) <span class="comment">// 指定 subscribe() 发生在 IO 线程</span></div><div class="line">.observeOn(AndroidSchedulers.mainThread()) <span class="comment">// 指定 Subscriber 的回调发生在主线程</span></div><div class="line">.subscribe(<span class="keyword">new</span> Observer&lt;Drawable&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Drawable drawable)</span> </span>&#123;</div><div class="line">        imageView.setImageDrawable(drawable);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwable e)</span> </span>&#123;</div><div class="line">        Toast.makeText(activity, <span class="string">"Error!"</span>, Toast.LENGTH_SHORT).show();</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ol>
+<li>变换<ul>
+<li>map()<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Observable.just(<span class="string">"images/logo.png"</span>) <span class="comment">// 输入类型 String</span></div><div class="line">    .map(<span class="keyword">new</span> Func1&lt;String, Bitmap&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Bitmap <span class="title">call</span><span class="params">(String filePath)</span> </span>&#123; <span class="comment">// 参数类型 String</span></div><div class="line">            <span class="keyword">return</span> getBitmapFromPath(filePath); <span class="comment">// 返回类型 Bitmap</span></div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    .subscribe(<span class="keyword">new</span> Action1&lt;Bitmap&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Bitmap bitmap)</span> </span>&#123; <span class="comment">// 参数类型 Bitmap</span></div><div class="line">            showBitmap(bitmap);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<p>未完待续…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;RxJava使用方法&quot;&gt;&lt;a href=&quot;#RxJava使用方法&quot; class=&quot;headerlink&quot; title=&quot;RxJava使用方法&quot;&gt;&lt;/a&gt;RxJava使用方法&lt;/h1&gt;&lt;h2 id=&quot;使用步骤&quot;&gt;&lt;a href=&quot;#使用步骤&quot; class=&quot;headerlink&quot; title=&quot;使用步骤&quot;&gt;&lt;/a&gt;使用步骤&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;导入jcenter&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxjava:1.0.14&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxandroid:1.0.1&#39;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://lijianqiang12.com/categories/Android/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nexus 6p root</title>
+    <link href="http://lijianqiang12.com/2016/01/15/nexus-6p-root/"/>
+    <id>http://lijianqiang12.com/2016/01/15/nexus-6p-root/</id>
+    <published>2016-01-15T12:56:30.000Z</published>
+    <updated>2016-07-24T09:48:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;nexus 6p到货两天，感受了一下原生态android的魅力，然而作为一个开发者，不root是不行的，那么大家现在就跟我一起踏上root的旅程吧！</p>
+<a id="more"></a>
+<h2 id="root"><a href="#root" class="headerlink" title="root:"></a>root:</h2><ul>
+<li>解锁步骤：<pre><code>注意：执行完毕后会清除手机内存，请提前备份！！！
+1. 连接电脑，安装驱动与adb调试工具
+ 2. 在命令行执行：adb reboot recovery
+ 3. 当手机重启并进入recovery模式后执行：fastboot flashing unlock
+</code></pre></li>
+<li>刷入TWRP(确认当前系统为官方任意版本的镜像，如果不是，请自行刷入官方rom)<pre><code>1. 下载twrp，文章末尾我的网盘链接或者官方地址https://dl.twrp.me/angler/
+2. 在recovery模式下执行fastboot flash recovery twrp-2.8.7.2-angler.img（后面这个是你刚下载的的recovery名字）
+</code></pre></li>
+<li>用TWRP直接卡刷下面的SuperSU-2.6x以上版本（文章末尾我的百度云链接里有）<pre><code>1. 进入recovery模式下，按音量下键，看到recovery mode后，按关机键，进入recovery，第一次进入后会看到有一个确认界面，然后右滑底部滑块即可
+2. 将手机插到电脑上，把刚才下载的SuperSU.zip放在手机里
+3. 点install，找到SuperSU.zip，选择，然后把最下面滑块右滑，刷入
+</code></pre></li>
+</ul>
+<p><img src="http://image.anruan.com/imglist/20160111/2016011150438535976.jpg" alt=""></p>
+<pre><code>4. 刷完后TWRP会提示你“是否安装Supersu”，直接点“Do not Install”即可
+</code></pre><h2 id="反root"><a href="#反root" class="headerlink" title="反root:"></a>反root:</h2><pre><code>如果你不需要root了，可以直接卡刷这个root卸载脚本（或者需要更新SU的，也要先卡刷这个卸载脚本）UPDATE-unSU.zip 
+</code></pre><h2 id="参考网址："><a href="#参考网址：" class="headerlink" title="参考网址："></a>参考网址：</h2><p><a href="http://www.mgyun.com:81/thread-48837-1-1.html" target="_blank" rel="external">http://www.mgyun.com:81/thread-48837-1-1.html</a><br><a href="http://m.anruan.com/view_16194.html" target="_blank" rel="external">http://m.anruan.com/view_16194.html</a></p>
+<h2 id="以上所有刷机包大家可到我的网盘下载"><a href="#以上所有刷机包大家可到我的网盘下载" class="headerlink" title="以上所有刷机包大家可到我的网盘下载"></a>以上所有刷机包大家可到我的网盘下载</h2><p><a href="http://pan.baidu.com/s/1kUcko2F" target="_blank" rel="external">http://pan.baidu.com/s/1kUcko2F</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;nexus 6p到货两天，感受了一下原生态android的魅力，然而作为一个开发者，不root是不行的，那么大家现在就跟我一起踏上root的旅程吧！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="刷机" scheme="http://lijianqiang12.com/categories/%E5%88%B7%E6%9C%BA/"/>
+    
+    
+      <category term="root" scheme="http://lijianqiang12.com/tags/root/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小事</title>
+    <link href="http://lijianqiang12.com/2015/12/14/%E5%B0%8F%E4%BA%8B/"/>
+    <id>http://lijianqiang12.com/2015/12/14/小事/</id>
+    <published>2015-12-14T06:25:13.000Z</published>
+    <updated>2016-07-24T11:28:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>生活的小事，人生的大事。</p>
+<a id="more"></a>
+<p>&emsp;&emsp;看着姐姐日渐消瘦的身体和苍白的面色，心里很不是滋味，希望上天能够公平一些，让善良的人都能有一个好的结果，希望治疗能够顺利，希望姐姐能够快点好起来，姐姐的这场病提醒了我，必须要快点成长起来了，独当一面，我曾想过：如果不是姐姐得病，而是父母呢，我该怎么办？如果大家都不帮忙呢？如果我只能靠自己呢？如何获得巨额的医疗费用，如何照顾好他们？如何应对每一个突发状况？这些并没有答案，我唯独知道必须要有一个足够成功的事业去作为支撑来承受来自生活的每一次挑战，也只有事业可以带给我照顾家人的基础，如果可以，我还是希望自己能够以纯粹的热爱来对待自己的工作，然而越长大越知道那是多么的不易，能够保持一颗纯粹的心，是多么的幸运，你说是吗？</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;生活的小事，人生的大事。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="生活日记" scheme="http://lijianqiang12.com/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E8%AE%B0/"/>
+    
+    
+      <category term="生活" scheme="http://lijianqiang12.com/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="日记" scheme="http://lijianqiang12.com/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android开发艺术探索(三)——View事件</title>
+    <link href="http://lijianqiang12.com/2015/12/12/Android%E5%BC%80%E5%8F%91%E8%89%BA%E6%9C%AF%E6%8E%A2%E7%B4%A2-%E4%B8%89-%E2%80%94%E2%80%94View%E4%BA%8B%E4%BB%B6/"/>
+    <id>http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/</id>
+    <published>2015-12-12T15:38:04.000Z</published>
+    <updated>2016-01-02T04:40:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>&emsp;&emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。</p>
+<a id="more"></a>
+<h2 id="View基础"><a href="#View基础" class="headerlink" title="View基础"></a>View基础</h2><h3 id="View与ViewGroup"><a href="#View与ViewGroup" class="headerlink" title="View与ViewGroup"></a>View与ViewGroup</h3><p>&emsp;&emsp;ViewGroup继承自View，因此View本身可以是单个控件也可以是一组控件，而ViewGroup内部又可以包含View或ViewGroup。</p>
+<h3 id="View的位置参数"><a href="#View的位置参数" class="headerlink" title="View的位置参数"></a>View的位置参数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">left = getLeft();</div><div class="line">right = getRight();</div><div class="line">top = getTop();</div><div class="line">buttom = getButtom();</div></pre></td></tr></table></figure>
+<center><img src="/images/View的位置坐标和父容器的关系.png" width="45%" height="45%">View的位置坐标和父容器的关系</center>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x = left + translationX;</div><div class="line">y = top + translationY;</div></pre></td></tr></table></figure>
+<ul>
+<li>x,y : View左上角的坐标</li>
+<li>translationX,translationY : View左上角相对于父容器的偏移量</li>
+</ul>
+<h3 id="MotionEvent"><a href="#MotionEvent" class="headerlink" title="MotionEvent"></a>MotionEvent</h3><p>在手指接触屏幕所产生的一系列事件中，典型事件如下：</p>
+<ul>
+<li>ACTION_DOWN——手指刚接触屏幕</li>
+<li>ACTION_MOVE——手指滑动</li>
+<li>ACTION_UP——手指离开屏幕</li>
+</ul>
+<h3 id="TouchSlop"><a href="#TouchSlop" class="headerlink" title="TouchSlop"></a>TouchSlop</h3><p>系统所能识别出的最小滑动距离，获取方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ViewConfiguration.get(getContext()).getScaledTouchSlop();</div></pre></td></tr></table></figure>
+<p>源码中为8dp</p>
+<h3 id="速度追踪VelocityTracker"><a href="#速度追踪VelocityTracker" class="headerlink" title="速度追踪VelocityTracker"></a>速度追踪VelocityTracker</h3><p>用于追踪手指的滑动速度，使用方法如下：</p>
+<p>&emsp;1. 在View的onTouchEvent中追踪当前单击事件的速度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">VelocityTracker velocityTracker = VelocityTracker.obtain();</div><div class="line">velocityTracker.addMovement(event);</div></pre></td></tr></table></figure>
+<p>&emsp;2. 当我们想知道当前的滑动速度时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">velocityTracker.copmuteCurrentVelocity(<span class="number">1000</span>);                <span class="comment">//计算一秒之内的变化情况</span></div><div class="line"><span class="keyword">int</span> xVelocity = (<span class="keyword">int</span>) velocityTracker.getXVelocity();        <span class="comment">//一秒之内X坐标的变化情况，从左向右为正</span></div><div class="line"><span class="keyword">int</span> yVelocity = (<span class="keyword">int</span>) velocityTracker.getYVelocity();        <span class="comment">//一秒之内Y坐标的变化情况，从上向下为正</span></div></pre></td></tr></table></figure>
+<p>&emsp;3. 不用时重置并回收内存</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">velocityTracker.clear();</div><div class="line">velocityTracker.recycler();</div></pre></td></tr></table></figure>
+<h3 id="手势GestureDetector"><a href="#手势GestureDetector" class="headerlink" title="手势GestureDetector"></a>手势GestureDetector</h3><p>检测手势，用于辅助检测用户的单击、滑动、长按、双击等行为，使用方式如下：</p>
+<p>&emsp;1. 创建GestureDetector对象并实现OnGestureListener和OnDoubleTapListener接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GestureDetector mGestureDetector = <span class="keyword">new</span> GestureDetector(<span class="keyword">this</span>);</div></pre></td></tr></table></figure>
+<p>&emsp;2. 接管目标View的onTouchEvent方法，在View的onTouchEvent中添加：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">boolean</span> consume = mGestureDetector.onTouchEvent(event);</div><div class="line"><span class="keyword">return</span> consume;</div></pre></td></tr></table></figure>
+<p>方法介绍：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">所属接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">onDown</td>
+<td style="text-align:center">手指轻触屏幕的瞬间，由一个ACTION_DOWN触发</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onShowPress</td>
+<td style="text-align:center">手指轻触屏幕，尚未拖动，强调没有松开或拖动的状态（个人理解在onDown之后）</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onSingleTapUp</td>
+<td style="text-align:center">单击，有可能是双击中的一次</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onScroll</td>
+<td style="text-align:center">手指按下并拖动</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onLongPress</td>
+<td style="text-align:center">长按</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onFling</td>
+<td style="text-align:center">按下屏幕快速滑动后松开</td>
+<td style="text-align:center">OnGestureListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onDoubleTap</td>
+<td style="text-align:center">双击，由两次单击组成，不能与onSingleTapConfirmed共存</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onSingleTapConfirmed</td>
+<td style="text-align:center">严格的单击行为，不可能是双击中的一次</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+<tr>
+<td style="text-align:center">onDoubleTapEvent</td>
+<td style="text-align:center">双击，在双击期间，ACTION_UP、ACTION_MOVE、ACTION_DOWN都会触发此回调</td>
+<td style="text-align:center">OnDoubleTapListener</td>
+</tr>
+</tbody>
+</table>
+<h3 id="弹性滑动Scroller"><a href="#弹性滑动Scroller" class="headerlink" title="弹性滑动Scroller"></a>弹性滑动Scroller</h3><p>scrollTo和scrollBy过程是瞬间完成的，某些情况下用户体验并不好，而利用Scroller可以实现弹性滑动，使用方法如下：</p>
+<ul>
+<li>在继承View的类中：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">Scroller mScroller = <span class="keyword">new</span> Scroller(mContext);</div><div class="line"></div><div class="line"><span class="comment">//缓慢滑动到指定位置</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> destX, <span class="keyword">int</span> destY)</span> </span>&#123;</div><div class="line">true<span class="keyword">int</span> scrollX = getScrollX();</div><div class="line">true<span class="keyword">int</span> delta = destX - scrollX;</div><div class="line">truemScroller.startScroll(scrollX, <span class="number">0</span>, delta, <span class="number">0</span>, <span class="number">1000</span>);  <span class="comment">//1s内缓慢滑动到destX</span></div><div class="line">trueinvalidate();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span></span>&#123;</div><div class="line">true<span class="keyword">if</span> (mScroller.computeScrollOffset()) &#123;</div><div class="line">truetruescrollTo(mScroller.getCurrX(), mScroller.getCurrY());</div><div class="line">truetruepostInvalidate();</div><div class="line">true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;emsp;&amp;emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="http://lijianqiang12.com/categories/Android/"/>
+    
+    
+      <category term="读书笔记" scheme="http://lijianqiang12.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="android" scheme="http://lijianqiang12.com/tags/android/"/>
+    
+  </entry>
+  
+</feed>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2016-07-28T11:51:23.000Z</updated>
+  <updated>2016-07-30T00:00:09.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lijianqiang12.com/2016/07/27/RxJava/"/>
     <id>http://lijianqiang12.com/2016/07/27/RxJava/</id>
     <published>2016-07-27T13:57:43.000Z</published>
-    <updated>2016-07-28T11:51:23.000Z</updated>
+    <updated>2016-07-30T00:00:09.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="RxJava使用方法"><a href="#RxJava使用方法" class="headerlink" title="RxJava使用方法"></a>RxJava使用方法</h1><h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
 <li>导入jcenter<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'io.reactivex:rxjava:1.0.14'</span></div><div class="line">compile <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div></pre></td></tr></table></figure>
@@ -86,7 +86,7 @@
     
     </summary>
     
-      <category term="Android" scheme="http://lijianqiang12.com/categories/Android/"/>
+      <category term="android" scheme="http://lijianqiang12.com/categories/android/"/>
     
     
   </entry>
@@ -166,7 +166,7 @@
     <link href="http://lijianqiang12.com/2015/12/12/Android%E5%BC%80%E5%8F%91%E8%89%BA%E6%9C%AF%E6%8E%A2%E7%B4%A2-%E4%B8%89-%E2%80%94%E2%80%94View%E4%BA%8B%E4%BB%B6/"/>
     <id>http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/</id>
     <published>2015-12-12T15:38:04.000Z</published>
-    <updated>2016-01-02T04:40:20.000Z</updated>
+    <updated>2016-07-30T00:00:02.000Z</updated>
     
     <content type="html"><![CDATA[<p>&emsp;&emsp;本篇将涉及到View的位置参数（left、right、top、buttom、x、y、translationX、translationY）、滑动（Scroller）速度（VelocityTracker）、手势（GestureDetector）、事件触发机制。</p>
 <a id="more"></a>
@@ -271,7 +271,7 @@
     
     </summary>
     
-      <category term="Android" scheme="http://lijianqiang12.com/categories/Android/"/>
+      <category term="android" scheme="http://lijianqiang12.com/categories/android/"/>
     
     
       <category term="读书笔记" scheme="http://lijianqiang12.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>

@@ -167,11 +167,11 @@ ga('send', 'pageview');
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                4
+                5
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                5
+                6
                 <span>标签</span>
             </div>
         </div>
@@ -220,6 +220,148 @@ ga('send', 'pageview');
 
             
             <section id="main">
+    <article id="post-coding-pages-ip被墙" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/19/coding-pages-ip被墙/">coding pages ip被墙</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/19/coding-pages-ip被墙/">
+            <time datetime="2016-08-19T12:17:52.000Z" itemprop="datePublished">2016-08-19</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/博客/">博客</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/against-GFW/">against GFW</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>最近自己的博客总是间歇性抽风，偶尔会打不开，登录git coding的时候也偶尔会有连接不上服务器的提示，在多尝试几次登录后，又能git coding又可以成功连接，博客也能成功连接，于是以为可能是git coding服务器不是很稳定（用的双线，国外访问github pages，国内访问git coding），然而事情并非我想的那样</p>
+<p><img src="/images/Image.jpeg" alt="Image"></p>
+<p>今天在我又一次尝试打开博客的时候，又像往常一样，打不开，于是我尝试打开git coding，很流畅，恩？？？<br>纳尼，ping了一下博客域名，不通，ping了一下博客的ip，不通，打开网址’lijianqiang12.coding.me’，打开了</p>
+<p><img src="/images/20150323192911_5_jcjc.jpg" alt="20150323192911_5_jcj"></p>
+<p>上网google了一下，基本可以确定是被墙了，让我不理解的是，我的网站上只有几篇无伤大雅的博客，没有黄赌毒，为什么要墙我，让我浪费那么多时间做这些没有意义的事情，看了知乎上<strong>如何评价手游需要广电审核</strong>问题下有个回答</p>
+<blockquote>
+<p>不能给人带来不便的权力不是真的权力</p>
+</blockquote>
+<p>在网上找了一些方法，最后决定’将dnspod解析中解析到ip改为解析到域名’<br><img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-19%20%E4%B8%8B%E5%8D%889.01.24.png" alt="屏幕快照 2016-08-19 下午9.01.24"></p>
+<p><img src="/images/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-19%20%E4%B8%8B%E5%8D%889.01.43.png" alt="屏幕快照 2016-08-19 下午9.01.43"></p>
+<p>然后进入漫长的等待…</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://lijianqiang12.com/2016/08/19/coding-pages-ip被墙/" data-id="cis1rp2ov0001y0knqa72jmga" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://lijianqiang12.com/2016/08/19/coding-pages-ip被墙/#comments" class="article-comment-link">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-RxJava" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -278,7 +420,7 @@ ga('send', 'pageview');
 
 </div>
 
-    <a data-url="http://lijianqiang12.com/2016/07/27/RxJava/" data-id="cir8eqpvg0008sokn25fi43se" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://lijianqiang12.com/2016/07/27/RxJava/" data-id="cis1rp2p00004y0knicm0ijnq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -411,7 +553,7 @@ ga('send', 'pageview');
 
 </div>
 
-    <a data-url="http://lijianqiang12.com/2016/01/15/nexus-6p-root/" data-id="cir8eqpve0006sokn0odb499x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://lijianqiang12.com/2016/01/15/nexus-6p-root/" data-id="cis1rp2p60005y0knlsqkaken" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -544,7 +686,7 @@ ga('send', 'pageview');
 
 </div>
 
-    <a data-url="http://lijianqiang12.com/2015/12/14/小事/" data-id="cir8eqpuz0000soknuuohmhhb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://lijianqiang12.com/2015/12/14/小事/" data-id="cis1rp2p80007y0kn2gu10mzj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -677,7 +819,7 @@ ga('send', 'pageview');
 
 </div>
 
-    <a data-url="http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/" data-id="cir8eqpv50002soknqr5bbr0p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://lijianqiang12.com/2015/12/12/Android开发艺术探索-三-——View事件/" data-id="cis1rp2om0000y0knaosj9cj7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

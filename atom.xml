@@ -62,7 +62,7 @@
     <link href="http://lijianqiang12.com/2016/07/27/RxJava/"/>
     <id>http://lijianqiang12.com/2016/07/27/RxJava/</id>
     <published>2016-07-27T13:57:43.000Z</published>
-    <updated>2016-08-21T09:17:52.000Z</updated>
+    <updated>2016-08-21T09:20:25.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="RxJava使用方法"><a href="#RxJava使用方法" class="headerlink" title="RxJava使用方法"></a>RxJava使用方法</h1><h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
 <li><p>导入jcenter</p>

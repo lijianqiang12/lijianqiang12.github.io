@@ -62,7 +62,7 @@
     <link href="http://lijianqiang12.com/2016/07/27/RxJava/"/>
     <id>http://lijianqiang12.com/2016/07/27/RxJava/</id>
     <published>2016-07-27T13:57:43.000Z</published>
-    <updated>2016-08-21T09:20:25.000Z</updated>
+    <updated>2016-08-21T09:21:04.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="RxJava使用方法"><a href="#RxJava使用方法" class="headerlink" title="RxJava使用方法"></a>RxJava使用方法</h1><h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
 <li><p>导入jcenter</p>
@@ -113,7 +113,6 @@
 <p>如上面这段代码，它的作用是将<code>String</code>事件转化为<code>Bitmap</code>事件。</p>
 </li>
 <li><p><code>flatmap()</code><br>首先看一段代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Student[] students = ...;</div><div class="line">Subscriber&lt;Course&gt; subscriber = <span class="keyword">new</span> Subscriber&lt;Course&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(Course course)</span> </span>&#123;</div><div class="line">        Log.d(tag, course.getName());</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;;</div><div class="line">Observable.from(students)</div><div class="line">    .flatMap(<span class="keyword">new</span> Func1&lt;Student, Observable&lt;Course&gt;&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> Observable&lt;Course&gt; <span class="title">call</span><span class="params">(Student student)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Observable.from(student.getCourses());</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">    .subscribe(subscriber);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>

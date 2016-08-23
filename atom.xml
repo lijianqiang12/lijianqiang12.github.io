@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2016-08-23T14:30:14.000Z</updated>
+  <updated>2016-08-23T14:46:37.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lijianqiang12.com/2016/08/22/Android-studio%E5%BF%AB%E6%8D%B7%E9%94%AE-Mac%E7%89%88/"/>
     <id>http://lijianqiang12.com/2016/08/22/Android-studio快捷键-Mac版/</id>
     <published>2016-08-22T13:27:41.000Z</published>
-    <updated>2016-08-23T14:30:14.000Z</updated>
+    <updated>2016-08-23T14:46:37.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>快捷键才是提高效率的一大杀器，一劳永逸，打算长期使用Android studio的话，还是记下来吧！</p>
@@ -35,8 +35,16 @@
 </thead>
 <tbody>
 <tr>
+<td>CMD + F7</td>
+<td>在当前文件中查找使用</td>
+</tr>
+<tr>
 <td>Cmd + F12</td>
 <td>文件方法结构</td>
+</tr>
+<tr>
+<td>CMD + 1</td>
+<td>打开或者关闭Project侧边栏</td>
 </tr>
 <tr>
 <td>Cmd + Plus,Minus</td>
@@ -53,6 +61,10 @@
 <tr>
 <td>Cmd + R</td>
 <td>查找+替换</td>
+</tr>
+<tr>
+<td>CMD + R</td>
+<td>打开当前类的父类中的方法</td>
 </tr>
 <tr>
 <td>Cmd + P</td>
@@ -125,6 +137,14 @@
 <tr>
 <td>Cmd + Alt + /</td>
 <td>注释代码(/**/)</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>——</td>
+</tr>
+<tr>
+<td>CMD + fn + Left/Right</td>
+<td>移动到编辑框的第一行和最后一行</td>
 </tr>
 <tr>
 <td>——–</td>
@@ -205,6 +225,22 @@
 <tr>
 <td>Alt + Shift + Up/Down</td>
 <td>上下移动代码</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>——</td>
+</tr>
+<tr>
+<td>Option + F7</td>
+<td>查找使用(Find usages)</td>
+</tr>
+<tr>
+<td>——–</td>
+<td>——</td>
+</tr>
+<tr>
+<td>Shift + Shift(Double Shift)</td>
+<td>全局搜索，整个项目范围内搜索任何文件或者字串</td>
 </tr>
 </tbody>
 </table>

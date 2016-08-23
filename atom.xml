@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2016-08-22T15:08:26.000Z</updated>
+  <updated>2016-08-23T10:35:21.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://lijianqiang12.com/2016/08/22/Android-studio%E5%BF%AB%E6%8D%B7%E9%94%AE-Mac%E7%89%88/"/>
     <id>http://lijianqiang12.com/2016/08/22/Android-studio快捷键-Mac版/</id>
     <published>2016-08-22T13:27:41.000Z</published>
-    <updated>2016-08-22T15:08:26.000Z</updated>
+    <updated>2016-08-23T10:35:21.000Z</updated>
     
-    <content type="html"><![CDATA[<table>
+    <content type="html"><![CDATA[<a id="more"></a>
+<table>
 <thead>
 <tr>
 <th>快捷键</th>
@@ -184,7 +185,8 @@
     
     <summary type="html">
     
-      &lt;table&gt;
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th&gt;快捷键&lt;/th&gt;
@@ -196,8 +198,7 @@
 &lt;td&gt;Control + Space&lt;/td&gt;
 &lt;td&gt;自动完成代码 &lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Control +
+
     
     </summary>
     
@@ -255,15 +256,15 @@
     <link href="http://lijianqiang12.com/2016/07/27/RxJava/"/>
     <id>http://lijianqiang12.com/2016/07/27/RxJava/</id>
     <published>2016-07-27T13:57:43.000Z</published>
-    <updated>2016-08-21T09:26:29.000Z</updated>
+    <updated>2016-08-23T10:35:36.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="RxJava使用方法"><a href="#RxJava使用方法" class="headerlink" title="RxJava使用方法"></a>RxJava使用方法</h1><h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ol>
 <li><p>导入jcenter</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'io.reactivex:rxjava:1.0.14'</span></div><div class="line">compile <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>&lt;!--more--&gt;
-</code></pre><ol>
+<a id="more"></a>
+<ol>
 <li><p>创建观察者<code>Observer</code>对象</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> Observer&lt;String&gt; observer = <span class="keyword">new</span> Observer&lt;String&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(String s)</span></span>&#123;</div><div class="line">        Log.d(tag,<span class="string">"Item: "</span>+s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span></span>&#123;</div><div class="line">         Log.d(tag,<span class="string">"Completed!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwablee)</span></span>&#123;</div><div class="line">         Log.d(tag,<span class="string">"Error!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <ul>
@@ -358,7 +359,11 @@ c. 每一个创建出来的 `Observable` 发送的事件，都被汇入同一个
     
     <summary type="html">
     
-      &lt;h1 id=&quot;RxJava使用方法&quot;&gt;&lt;a href=&quot;#RxJava使用方法&quot; class=&quot;headerlink&quot; title=&quot;RxJava使用方法&quot;&gt;&lt;/a&gt;RxJava使用方法&lt;/h1&gt;&lt;h2 id=&quot;使用步骤&quot;&gt;&lt;a href=&quot;#使用步骤&quot; class=&quot;head
+      &lt;h1 id=&quot;RxJava使用方法&quot;&gt;&lt;a href=&quot;#RxJava使用方法&quot; class=&quot;headerlink&quot; title=&quot;RxJava使用方法&quot;&gt;&lt;/a&gt;RxJava使用方法&lt;/h1&gt;&lt;h2 id=&quot;使用步骤&quot;&gt;&lt;a href=&quot;#使用步骤&quot; class=&quot;headerlink&quot; title=&quot;使用步骤&quot;&gt;&lt;/a&gt;使用步骤&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;导入jcenter&lt;/p&gt;
+ &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxjava:1.0.14&#39;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;compile &lt;span class=&quot;string&quot;&gt;&#39;io.reactivex:rxandroid:1.0.1&#39;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
     
     </summary>
     

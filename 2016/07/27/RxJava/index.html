@@ -9,38 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="RxJava使用方法使用步骤
 导入jcenter
- 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;
-
-
-&amp;lt;!--more--&amp;gt;
-
-创建观察者Observer对象
- 12345678910111213141516 Observer&amp;lt;String&amp;gt; observer = n">
+ 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJava">
 <meta property="og:url" content="http://lijianqiang12.com/2016/07/27/RxJava/index.html">
 <meta property="og:site_name" content="Leo's Home">
 <meta property="og:description" content="RxJava使用方法使用步骤
 导入jcenter
- 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;
-
-
-&amp;lt;!--more--&amp;gt;
-
-创建观察者Observer对象
- 12345678910111213141516 Observer&amp;lt;String&amp;gt; observer = n">
-<meta property="og:updated_time" content="2016-08-21T09:26:29.000Z">
+ 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
+<meta property="og:updated_time" content="2016-08-23T10:35:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RxJava">
 <meta name="twitter:description" content="RxJava使用方法使用步骤
 导入jcenter
- 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;
-
-
-&amp;lt;!--more--&amp;gt;
-
-创建观察者Observer对象
- 12345678910111213141516 Observer&amp;lt;String&amp;gt; observer = n">
+ 12compile &apos;io.reactivex:rxjava:1.0.14&apos;compile &apos;io.reactivex:rxandroid:1.0.1&apos;">
     
 
     
@@ -292,8 +274,8 @@ ga('send', 'pageview');
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">compile <span class="string">'io.reactivex:rxjava:1.0.14'</span></div><div class="line">compile <span class="string">'io.reactivex:rxandroid:1.0.1'</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>&lt;!--more--&gt;
-</code></pre><ol>
+<a id="more"></a>
+<ol>
 <li><p>创建观察者<code>Observer</code>对象</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> Observer&lt;String&gt; observer = <span class="keyword">new</span> Observer&lt;String&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNext</span><span class="params">(String s)</span></span>&#123;</div><div class="line">        Log.d(tag,<span class="string">"Item: "</span>+s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCompleted</span><span class="params">()</span></span>&#123;</div><div class="line">         Log.d(tag,<span class="string">"Completed!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Throwablee)</span></span>&#123;</div><div class="line">         Log.d(tag,<span class="string">"Error!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <ul>

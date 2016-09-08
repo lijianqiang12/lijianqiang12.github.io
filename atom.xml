@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2016-09-07T13:32:13.000Z</updated>
+  <updated>2016-09-08T15:27:41.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://lijianqiang12.com/2016/09/07/create-app/"/>
     <id>http://lijianqiang12.com/2016/09/07/create-app/</id>
     <published>2016-09-07T11:34:16.000Z</published>
-    <updated>2016-09-07T13:32:13.000Z</updated>
+    <updated>2016-09-08T15:27:41.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很久以前就想写一个APP，原本想的是做一个手机版的zillions of games，然而在开工不久手游上架就需要广电的审核了，思考再三，觉得不能上架的APP即便写出来也只能作为一个Demo，没有多大意义，最近又有了新的想法，做一款吐槽类软件，目标群体为心有怨气无处发泄的人，在这里吐槽的人名字会被以首字母缩写代替，吐槽对象会被归类，大家可以找到拥有同样吐槽目标的“朋友”，有共同敌人的人就能成为朋友嘛，只是为了好玩，并无野心，希望做的过程中能够给自己带来收获，也给用的人带来快乐。</p>
 <a id="more"></a>
@@ -37,8 +37,11 @@
 <li>根据距离、热度排序</li>
 <li>根据地域、公司、人名缩写搜索</li>
 <li>被点开次数统计及评论数量统计</li>
+<li>退出登录</li>
 </ol>
-<h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>原型我打算用墨刀来开发，简单方便，易用，不会在这一环节浪费太多时间</p>
+<h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>原型我打算用墨刀来开发，简单方便，易用，不会在这一环节浪费太多时间。<br>下面是我用墨刀画好的几个页面的草图<br><img src="/images/1-0_%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png" alt="1-0_启动画面"><br><img src="/images/1-1_%E9%A6%96%E9%A1%B5.png" alt="1-1_首页"></p>
+<p><img src="/images/1-2_%E5%85%B3%E6%B3%A8.png" alt="1-2_关注"></p>
+<p><img src="/images/1-3_%E6%B6%88%E6%81%AF.png" alt="1-3_消息"><br><img src="/images/1-3-1_%E7%A7%81%E4%BF%A1.png" alt="1-3-1_私信"><br><img src="/images/1-4_%E6%88%91.png" alt="1-4_我"><br><img src="/images/1-4-1_%E4%BF%AE%E6%94%B9%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B.png" alt="1-4-1_修改个人简介"><br><img src="/images/1-4-2_%E5%8F%8D%E9%A6%88.png" alt="1-4-2_反馈"><br><img src="/images/1-4-3_%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8.png" alt="1-4-3_关注列表"></p>
 ]]></content>
     
     <summary type="html">

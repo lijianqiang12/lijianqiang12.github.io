@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2016-09-08T15:27:41.000Z</updated>
+  <updated>2016-12-03T04:28:43.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -16,11 +16,35 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>大猫哥+流量卫士+917天知易卡密搭建免流服务</title>
+    <link href="http://lijianqiang12.com/2016/12/03/mianliu/"/>
+    <id>http://lijianqiang12.com/2016/12/03/mianliu/</id>
+    <published>2016-12-03T04:24:28.000Z</published>
+    <updated>2016-12-03T04:28:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>在免流即将被和谐之际，再玩儿最后一波</p>
+</blockquote>
+<a id="more"></a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在免流即将被和谐之际，再玩儿最后一波&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>一个APP的诞生记录</title>
     <link href="http://lijianqiang12.com/2016/09/07/create-app/"/>
     <id>http://lijianqiang12.com/2016/09/07/create-app/</id>
     <published>2016-09-07T11:34:16.000Z</published>
-    <updated>2016-09-08T15:27:41.000Z</updated>
+    <updated>2016-09-12T14:55:47.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很久以前就想写一个APP，原本想的是做一个手机版的zillions of games，然而在开工不久手游上架就需要广电的审核了，思考再三，觉得不能上架的APP即便写出来也只能作为一个Demo，没有多大意义，最近又有了新的想法，做一款吐槽类软件，目标群体为心有怨气无处发泄的人，在这里吐槽的人名字会被以首字母缩写代替，吐槽对象会被归类，大家可以找到拥有同样吐槽目标的“朋友”，有共同敌人的人就能成为朋友嘛，只是为了好玩，并无野心，希望做的过程中能够给自己带来收获，也给用的人带来快乐。</p>
 <a id="more"></a>
@@ -512,7 +536,7 @@ c. 每一个创建出来的 `Observable` 发送的事件，都被汇入同一个
     <link href="http://lijianqiang12.com/2015/12/14/%E5%B0%8F%E4%BA%8B/"/>
     <id>http://lijianqiang12.com/2015/12/14/小事/</id>
     <published>2015-12-14T06:25:13.000Z</published>
-    <updated>2016-08-15T12:06:50.000Z</updated>
+    <updated>2017-01-23T12:05:10.000Z</updated>
     
     <content type="html"><![CDATA[<p>生活的小事，人生的大事。</p>
 <a id="more"></a>

@@ -671,9 +671,9 @@ c. 每一个创建出来的 `Observable` 发送的事件，都被汇入同一个
       <category term="android" scheme="http://lijianqiang12.com/categories/android/"/>
     
     
-      <category term="android" scheme="http://lijianqiang12.com/tags/android/"/>
-    
       <category term="读书笔记" scheme="http://lijianqiang12.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="android" scheme="http://lijianqiang12.com/tags/android/"/>
     
   </entry>
   

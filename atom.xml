@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lijianqiang12.com/"/>
-  <updated>2017-01-23T12:44:35.000Z</updated>
+  <updated>2017-01-26T04:37:30.000Z</updated>
   <id>http://lijianqiang12.com/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>跃翔--需求分析</title>
+    <link href="http://lijianqiang12.com/2017/01/26/jump/"/>
+    <id>http://lijianqiang12.com/2017/01/26/jump/</id>
+    <published>2017-01-26T03:55:26.000Z</published>
+    <updated>2017-01-26T04:37:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>跃翔是一款能帮助我们锻炼弹跳的APP，它为我们规划训练流程（如aa4或弹跳圣经），到时间提醒我们训练，能够和跃友们共同锻炼，相互交流进度，共同进步，了解跃友们的训练效果，帮助大家早日完成扣篮梦。</p>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><ul>
+<li>手机号</li>
+<li>邮箱</li>
+<li>QQ</li>
+<li>微信</li>
+</ul>
+<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><ul>
+<li>邮箱</li>
+<li>手机号</li>
+</ul>
+<h2 id="社区功能"><a href="#社区功能" class="headerlink" title="社区功能"></a>社区功能</h2><ul>
+<li>可以发帖，可以加入图片</li>
+<li>可以评论</li>
+<li>收到别人的评论后会有提醒</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;跃翔是一款能帮助我们锻炼弹跳的APP，它为我们规划训练流程（如aa4或弹跳圣经），到时间提醒我们训练，能够和跃友们共同锻炼，相互交流进度，共
+    
+    </summary>
+    
+    
+      <category term="app" scheme="http://lijianqiang12.com/tags/app/"/>
+    
+  </entry>
   
   <entry>
     <title>大猫哥+流量卫士+917天知易卡密搭建免流服务</title>
@@ -49,7 +85,7 @@
     <link href="http://lijianqiang12.com/2016/09/07/create-app/"/>
     <id>http://lijianqiang12.com/2016/09/07/create-app/</id>
     <published>2016-09-07T11:34:16.000Z</published>
-    <updated>2017-01-23T14:01:16.000Z</updated>
+    <updated>2017-01-26T03:57:50.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很久以前就想写一个APP，原本想的是做一个手机版的zillions of games，然而在开工不久手游上架就需要广电的审核了，思考再三，觉得不能上架的APP即便写出来也只能作为一个Demo，没有多大意义，最近又有了新的想法，做一款真人叫醒服务，以难以被闹钟叫醒的年轻的单身男性和想要兼职获取回报的年轻女性为目标用户。前者给于后者一定回报，后者为前者提供叫醒服务。</p>
 <a id="more"></a>
@@ -89,10 +125,10 @@
     
     </summary>
     
-      <category term="android" scheme="http://lijianqiang12.com/categories/android/"/>
+      <category term="app" scheme="http://lijianqiang12.com/categories/app/"/>
     
     
-      <category term="android" scheme="http://lijianqiang12.com/tags/android/"/>
+      <category term="app" scheme="http://lijianqiang12.com/tags/app/"/>
     
   </entry>
   
